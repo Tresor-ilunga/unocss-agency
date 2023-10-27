@@ -1,77 +1,82 @@
-<script setup>
-import { ref } from 'vue'
- 
-const navIsOpen = ref(false)
-const navItems = [
-    {
-        id:1,
-        text:"Portfolio",
-        href:"/",
-    },
-    {
-        id:2,
-        text:"Company",
-        href:"/",
-    },
-    {
-        id:3,
-        text:"Products",
-        href:"/",
-    },
-    {
-        id:4,
-        text:"Ressources",
-        href:"/",
-    }
-]
- 
-function toggleNavBar(){
-    navIsOpen.value = !navIsOpen.value
-    document.body.classList.toggle("overflow-y-auto")
-}
-</script>
 <template>
-    <header
-        class="absolute left-0 top-0 w-full flex items-center h24 z40">
-        <nav px="5 sm:10 md:12 lg:5"
-            class="relative mx-auto lg-max-w-7xl w-full flex gap-x-5 justify-between items-center">
-            <div class="flex items-center min-w-max">
-                <router-link to="#" class="font-semibold flex items-center gap-x-2">
-                    <div class="flex items-center -space-x-3">
-                        <span bg="purple-6 dark:purple-5" class="h6 aspect-square rd-full flex"></span>
-                        <span bg="violet-6 dark:violet-4" class="h6 aspect-square blur rd-full flex"></span>
+        <header class="absolute top-0 inset-x-0 z50 h24 flex items-center">
+    <div px="5 sm:10 md:12 lg:5" class="mx-auto lg-max-w-7xl w-full h-full items-center">
+        <nav class="flex justify-between items-center h-full">
+            <div class="flex min-w-max items-center">
+                <a href="/" un-text="2xl gray-7 dark:gray-3" class="flex items-center gap-x-4 font-semibold">
+                    <div class="flex items-center -space-x-3 font-semibold">
+                        <span bg="emerald-6 dark:emerald-4" class="h6 aspect-square rd-full flex"></span>
+                        <span bg="gray-6 dark:white" class="h6 aspect-square rd-full flex"></span>
                     </div>
-                    <span text="lg gray-7 dark:gray-3">Agency</span>
-                </router-link>
+                    Agency
+                </a>
             </div>
- 
-            <div bg="white dark:gray-950 lg:!transparent" border-b="~ border-gray-2 dark:gray-8 lg:none" py="8 lg:0" px="5 sm:10 md:12 lg:0"
-                class="absolute top-17 left-0 w-full h-[calc(100dvh-68px)] lg-h-max lg-w-max lg-space-x-16 lg-top-0 lg-relative  lg-flex duration-300 lg-transition-none ease-linear"
-                :class="navIsOpen?'translate-y-0 op-100 visible':'translate-y-10 op-0 invisible lg-visible  lg-translate-y-0 lg-op-100'">
+            <div un-bg="white dark:gray-950 lg:!transparent" un-py="20 lg:0" un-px="5 sm:10 md:14 lg:0"
+                space-y="10 lg:0"
+                class="flex flex-col inset-0 fixed top-0 h-100dvh
+                transition-all ease-linear duration-300 lg-flex-row lg-flex-1 lg-gap-x-10 lg-relative lg-top-0 lg-h-full lg-items-center lg-justify-between lg-w-max"
+                :class="navIsOpen ? 'translate-y-0 op-100 visible' : '-translate-y-9 op-0 invisible lg-visible lg-op-100 lg-translate-y-0'">
                 <ul text="gray-7 dark:gray-3"
-                    class="flex flex-col lg-flex-row gap-6 lg-items-center lg-w-full lg-justify-center">
+                    class="flex flex-col gap-y-5 lg-items-center lg-flex-row lg-gap-x-5 lg-h-full lg-justify-center lg-flex-1">
                     <li v-for="navItem in navItems" :key="navItem.id">
-                        <router-link :to="navItem.href"  class="px2 py2.5 transition-colors hover-text-purple-6">
-                            {{navItem.text}}
-                        </router-link>
+                        <a :href="navItem.href" transition ease-linear hover="text-gray-9 dark:text-white">
+                            {{ navItem.text }}
+                        </a>
                     </li>
+
                 </ul>
-                <div  class="flex flex-col sm-flex-row sm-items-center gap-4  lg-min-w-max mt10 lg-mt0">
-                    <router-link to="#" class="bg-gray-1 dark-bg-gray-9 text-purple-6 dark-text-gray-3 border border-gray-2 dark-border-gray-8 flex items-center justify-center w-full sm-w-auto h12 px6 rd-full">
-                        Get It touch
-                    </router-link>
+                <div w-full flex sm-w-max lg-min-w-max lg-items-center>
+                    <a href="#" un-text="gray-7 dark:gray-3 hover:gray-9 dark:hover:white"
+                        border-b="~ gray-7 dark:blue-3 hover:gray-9 dark:hover:white"
+                        class="flex justify-center gap-x-3 items-center bg-transparent">
+                        Get in touch
+                        <span i-carbon-arrow-right flex></span>
+                    </a>
                 </div>
             </div>
-            <div class="flex items-center lg-hidden">
-                <button @click="toggleNavBar()" border-l="~ purple-1 dark:gray-8"
-                    class="outline-none pl-3 relative py-3 bg-transparent" aria-label="toggle navbar">
-                    <div id="line-1" aria-hidden="true" bg="gray-8 dark:gray-3"
-                        class="h0.5 w6 rd transition duration-300" :class="navIsOpen ? 'rotate-45 translate-y-1.5' : ''">
-                    </div>
-                    <div id="line-2" aria-hidden="true" bg="gray-8 dark:gray-3"
-                        class="mt2 h0.5 w6 rd transition duration-300" :class="navIsOpen ? '-rotate-45 -translate-y-1.5' : ''"></div>
+            <div class="flex items-center justify-end relative z60 lg-hidden">
+                <button aria-label="toggle navbar" @click="toggleNavbar()" un-bg="emerald-6 dark:emerald-5"
+                    class="p3 rd-full outline-none w12 aspect-square flex flex-col relative justify-center items-center">
+                    <span class="w6 h0.5 rd-full bg-gray-3 transition-transform duration-300 ease-linear"
+                        :class="navIsOpen ? 'translate-y-1.5 rotate-40' : ''"></span>
+                    <span class="w6 origin-center  mt1 h0.5 rd-full bg-gray-3 transition-all duration-300 ease-linear"
+                        :class="navIsOpen ? 'scale-0 op-0' : ''"></span>
+                    <span class="w6 mt1 h0.5 rd-full bg-gray-3 transition-all duration-300 ease-linear"
+                        :class="navIsOpen ? '-translate-y-1.5 -rotate-40' : ''"></span>
                 </button>
             </div>
         </nav>
-    </header>
+    </div>
+</header>
 </template>
+<script setup>
+    import { ref } from 'vue'
+    const navIsOpen = ref(false)
+    const navItems = [
+        {
+            id:1,
+            text:"Portfolio",
+            href:"/",
+        },
+        {
+            id:2,
+            text:"Products",
+            href:"#",
+        },
+        {
+            id:3,
+            text:"Services",
+            href:"#",
+        },
+        {
+            id:4,
+            text:"Company",
+            href:"#",
+        }
+    ]
+
+    function toggleNavbar(){
+        navIsOpen.value = !navIsOpen.value
+        document.body.classList.toggle("overflow-y-auto")
+    }
+</script>
